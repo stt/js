@@ -1,4 +1,5 @@
 This is a repository for scripts I've written in the past and haven't lost yet.
 
+comicbrow/       - Browser-based cbr/cbz reader
 jquery.nanoEd.js - Simplistic one-file WYSIWYG HTML editor, not actively developed
 

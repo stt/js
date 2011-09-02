@@ -1,0 +1,27 @@
+a {color:yellow;}
+body { background-color:black; color:white; }
+html,body,#container { margin:0; height:99%; }
+#container { text-align:center }
+.dir { background-color:#333; }
+.file { background-color:#999; }
+
+.comic.fitw.dual { width:50%; height:auto; }
+.comic.fitw.dual { float:left; }
+.comic.fitw.single { width:100%; height:auto; }
+
+.comic { cursor:none; height:100%; }
+
+#pos { color:gray; }
+#help,#helpdlg {
+	border:1px solid gray;
+	padding:10px;
+	font-size:small;
+	position:absolute;
+	right:20px; 
+}
+#helpdlg {
+	display:none;
+	white-space:pre;
+	background-color:black;
+}
+

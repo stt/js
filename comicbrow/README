@@ -1,0 +1,15 @@
+
+comicbrow requires imagemagick, avfs, unrar and nodejs (>=0.4)
+And also node modules: mime, imagemagick
+
+Notes:
+
+Imagemagick node module may not be able to scale some of the bigger images, to
+fix, open node_modules/imagemagick/imagemagick.js and increase maxBuffers to
+e.g. 1500*1024 (would be nice if this could be done from the code).
+
+avfs doesn't work with unrar free version, unrar-nonfree is available from
+example ubuntu multiverse. Adding support for free would be a matter of editing
+a shellscript but avfs is getting a bit old and once libarchive gets it's rar
+support finished I'll probably move to that.
+

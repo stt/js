@@ -32,17 +32,6 @@ try {
 String.prototype.endsWith = function(suffix) {
 	return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
-Array.prototype.each = function(fun) {
-	if (typeof fun != "function") return;
-	for (var i=0; i<this.length; i++) {
-		fun(i, this[i]);
-	}
-	return this;
-};
-function sprintf(format, etc) {
-	var i = 1, arg = arguments;
-	return format.replace(/%((%)|s)/g, function (m) { return m[2] || arg[i++] });
-}
 
 function ansi(code, txt) {
 	return "\033[0;"+code+txt+"\033[0m";
@@ -64,9 +53,8 @@ var HttpException = function (req, res, msg, code) {
 process.on('uncaughtException', function(ex) {
 	try {
 		log([ex.req.connection.remoteAddress, ex.req.method, ex.req.url, ex.code].join(' '));
-  	ex.res.writeHead(ex.code, {'Content-Type':'text/html'});
-		var out = sprintf("Error %s: %s", ex.code, ex.msg);
-	  ex.res.end(out);
+		ex.res.writeHead(ex.code, {'Content-Type':'text/html'});
+		ex.res.end("Error "+ex.code+": "+ex.msg);
 		sys.log(ansi("35m", "Exception: "+ex.msg));
 	} catch(e){
 		sys.log(ansi("35m", "Unknown exception "+ex+util.inspect(ex)+"\n"+ex.stack));
@@ -125,8 +113,6 @@ function handleStatic(req, res) {
 	if(f.isDirectory()) {
 		res.writeHead(200, {'Content-Type':'text/html', 'Content-Encoding':'gzip'});
 		res.end(htmlBuf, "binary");
-		//util.pump(fs.createReadStream('cobo.html'), res, function(e) {	});
-		//fs.readFile("cobo.html", function (err, file) { res.end(file); });
 		return;
 	}
 	
